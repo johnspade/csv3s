@@ -1,0 +1,13 @@
+csv3s
+Copyright 2022 Ivan Lopatin
+Licensed under MIT License (see LICENSE)
+
+This software contains portions of code derived from kantan.csv
+https://github.com/nrinaudo/kantan.csv
+Copyright (c) 2015 Nicolas Rinaudo
+Licensed under Apache License 2.0 (see LICENSE)
+
+This software contains portions of code derived from cormorant
+https://github.com/davenverse/cormorant
+Copyright (c) 2018 Christopher Davenport
+Licensed under MIT License (see LICENSE)
