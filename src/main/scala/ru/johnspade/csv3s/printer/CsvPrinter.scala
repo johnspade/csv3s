@@ -1,7 +1,6 @@
 package ru.johnspade.csv3s.printer
 
 import ru.johnspade.csv3s.core.CSV
-import ru.johnspade.csv3s.parser.LiveCsvParser
 
 trait CsvPrinter:
   def print(csv: CSV): String
