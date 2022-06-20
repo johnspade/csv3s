@@ -55,7 +55,17 @@ parsed.map(decoder.decode(_))
 // Right(Right(Person(Bob,33))): 
 //   scala.util.Either[zio.parser.Parser.ParserError[java.lang.String], scala.util.Either[ru.johnspade.csv3s.codecs.DecodeError, Person]]
 
-
 CsvPrinter.default.print(encoder.encode(Person("Bob", 33)))
 // Bob,33: scala.Predef.String
+```
+
+Declare custom encoders and decoders:
+
+```scala
+  given StringEncoder[LocalDate] = _.toString
+  given StringDecoder[LocalDate] = s =>
+    scala.util.Try(LocalDate.parse(s))
+      .toEither
+      .left
+      .map(e => DecodeError.TypeError(e.getMessage))
 ```
