@@ -12,7 +12,7 @@ import ru.johnspade.csv3s.parser.LiveCsvParser
 object CsvParserSpec extends ZIOSpecDefault:
   private val csvParser = LiveCsvParser
 
-  override def spec: ZSpec[TestEnvironment with Scope, Any] = suite("CSV example")(
+  override def spec: Spec[TestEnvironment with Scope, Any] = suite("CSV example")(
     test("parse a single header") {
       val basicString = "Something,"
       val expect      = CSV.Header("Something")

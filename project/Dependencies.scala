@@ -2,9 +2,9 @@ import sbt._
 
 object Dependencies {
   object V {
-    val zio       = "2.0.0-RC5"
-    val zioParser = "0.1.4"
-    val magnolia  = "1.0.0"
+    val zio       = "2.0.6"
+    val zioParser = "0.1.8"
+    val magnolia  = "1.2.6"
   }
 
   val zio        = "dev.zio"                      %% "zio"          % V.zio

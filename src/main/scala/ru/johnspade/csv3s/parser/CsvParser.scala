@@ -17,14 +17,14 @@ class CsvParser(val separator: Char):
   private val LF         = Syntax.charIn(lf)
   private val CRLF       = CR ~ LF
 
-  val PERMISSIVE_CRLF: Syntax[String, Char, Char, Chunk[Char], Chunk[Char]] =
-    (CRLF.transform[Chunk[Char], Chunk[Char]](
+  val PERMISSIVE_CRLF =
+    (CRLF.transform(
       { case (c1, c2) => Chunk(c1, c2) },
       c => (c.head, c(1))
-    ) | LF.transform[Chunk[Char], Chunk[Char]](
+    ) | LF.transform(
       c => Chunk(c),
       c => c.head
-    ) | CR.transform[Chunk[Char], Chunk[Char]](
+    ) | CR.transform(
       c => Chunk(c),
       c => c.head
     )).named("PERMISSIVE_CRLF")
@@ -36,36 +36,39 @@ class CsvParser(val separator: Char):
     .named("TEXTDATA")
 
   val escaped =
-    (DQUOTE ~> (TEXTDATA | SEPARATOR | CR | LF | TWO_DQUOTE.map(_ => dquote)).*.map(_.mkString)
-      .map(CSV.Field.apply) <~ DQUOTE)
+    (DQUOTE ~> (TEXTDATA | SEPARATOR | CR | LF | TWO_DQUOTE
+      .transform(_ => dquote, t => (t, t))).*.transform(xs => CSV.Field(xs.mkString), f => Chunk.from(f.x.toList))
+      <~ DQUOTE)
       .named("escaped")
 
-  val `non-escaped` = TEXTDATA.*.map(_.mkString)
-    .map(CSV.Field.apply)
+  val `non-escaped` = TEXTDATA.*.transform(xs => CSV.Field(xs.mkString), f => Chunk.from(f.x.toList))
     .named("non-escaped")
 
   val field = (escaped | `non-escaped`).named("CSV.Field")
 
   val name = field
-    .map(f => CSV.Header(f.x))
+    .transform(f => CSV.Header(f.x), h => CSV.Field(h.value))
     .named("CSV.Header")
 
   val header = name
     .repeatWithSep(SEPARATOR.unit(separator))
-    .map(chunk => CSV.Headers(Seq.from(chunk)))
+    .transform(chunk => CSV.Headers(Seq.from(chunk)), hs => Chunk.from(hs.l))
     .named("CSV.Headers")
 
   val record = field
     .repeatWithSep(SEPARATOR.unit(separator))
-    .map(chunk => CSV.Row(Seq.from(chunk)))
+    .transform(chunk => CSV.Row(Seq.from(chunk)), r => Chunk.from(r.l))
     .named("CSV.Row")
 
   val fileBody = (record.repeatWithSep(PERMISSIVE_CRLF.unit(Chunk.empty)) <~ PERMISSIVE_CRLF.?.unit(None))
-    .map(chunk => CSV.Rows(chunk.toList))
+    .transform(chunk => CSV.Rows(chunk.toList), rs => Chunk.from(rs.rows))
     .named("CSV.Rows")
 
   val `complete-file` = ((header <~ PERMISSIVE_CRLF.unit(Chunk.empty)) ~ fileBody)
-    .map { case (header, rows) =>
-      CSV.Complete(header, rows)
-    }
+    .transform(
+      { case (header, rows) =>
+        CSV.Complete(header, rows)
+      },
+      c => (c.headers, c.rows)
+    )
     .named("CSV.Complete")

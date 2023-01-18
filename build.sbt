@@ -1,6 +1,6 @@
 import Dependencies._
 
-val scala3Version = "3.1.0"
+val scala3Version = "3.2.1"
 
 name                     := "csv3s"
 ThisBuild / organization := "ru.johnspade"
@@ -33,6 +33,5 @@ lazy val root = project
       zioTestSbt % Test,
       zioParser,
       magnolia
-    ),
-    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
+    )
   )
