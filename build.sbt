@@ -4,7 +4,7 @@ val scala3Version = "3.2.1"
 
 name                     := "csv3s"
 ThisBuild / organization := "ru.johnspade"
-ThisBuild / version      := "0.1.0"
+ThisBuild / version      := "0.1.1"
 
 ThisBuild / scalaVersion := scala3Version
 
