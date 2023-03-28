@@ -1,6 +1,6 @@
 import Dependencies._
 
-val scala3Version = "3.2.1"
+val scala3Version = "3.2.2"
 
 name                     := "csv3s"
 ThisBuild / organization := "ru.johnspade"
