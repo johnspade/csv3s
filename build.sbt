@@ -35,3 +35,6 @@ lazy val root = project
       magnolia
     )
   )
+
+addCommandAlias("fmtAll", ";scalafmtAll;scalafmtSbt")
+addCommandAlias("validate", ";compile;Test/compile;scalafmtCheckAll;scalafmtSbtCheck;test")
