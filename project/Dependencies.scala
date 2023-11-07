@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
   object V {
-    val zio       = "2.0.18"
+    val zio       = "2.0.19"
     val zioParser = "0.1.9"
     val magnolia  = "1.3.4"
   }
