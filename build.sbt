@@ -4,7 +4,7 @@ val scala3Version = "3.3.3"
 
 name                     := "csv3s"
 ThisBuild / organization := "ru.johnspade"
-ThisBuild / version      := "0.1.3"
+ThisBuild / version      := "0.1.4"
 
 ThisBuild / scalaVersion := scala3Version
 
@@ -16,8 +16,8 @@ ThisBuild / developers := List(
   Developer(
     "johnspade",
     "Ivan Lopatin",
-    "ivan+csv3s@ilopatin.ru",
-    url("https://about.johnspade.ru")
+    "i+csv3s@jspade.dev",
+    url("https://github.com/johnspade")
   )
 )
 ThisBuild / publishMavenStyle      := true
