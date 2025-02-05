@@ -13,6 +13,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: coursier/cache-action@v6
+          cache: sbt
+      - uses: sbt/setup-sbt@v1
       - name: Validate project
         run: sbt validate
