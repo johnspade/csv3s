@@ -25,7 +25,7 @@ object CsvParserSpec extends ZIOSpecDefault:
     },
     test("parse a group of headers") {
       val baseHeader = "Something,Something2,Something3"
-      val expect = Chunk(
+      val expect     = Chunk(
         CSV.Header("Something"),
         CSV.Header("Something2"),
         CSV.Header("Something3")
@@ -35,7 +35,7 @@ object CsvParserSpec extends ZIOSpecDefault:
     },
     test("parse headers correctly") {
       val baseHeader = """Something,Something2,Something3"""
-      val expect = CSV.Headers(
+      val expect     = CSV.Headers(
         Seq(
           CSV.Header("Something"),
           CSV.Header("Something2"),
@@ -47,7 +47,7 @@ object CsvParserSpec extends ZIOSpecDefault:
     },
     test("parse a row correctly") {
       val singleRow = "yellow,green,blue"
-      val expected = CSV.Row(
+      val expected  = CSV.Row(
         Seq(
           CSV.Field("yellow"),
           CSV.Field("green"),
