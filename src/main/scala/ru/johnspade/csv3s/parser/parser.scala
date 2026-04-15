@@ -4,7 +4,7 @@ import ru.johnspade.csv3s.parser.CsvParser
 import ru.johnspade.csv3s.core.*
 import zio.Chunk
 
-val LiveCsvParser = CsvParser(',')
+val LiveCsvParser                                                  = CsvParser(',')
 def parseComplete(text: String, parser: CsvParser = LiveCsvParser) =
   parser.`complete-file`.parseString(text)
 

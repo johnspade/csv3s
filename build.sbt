@@ -11,7 +11,7 @@ ThisBuild / scalaVersion := scala3Version
 ThisBuild / description := "CSV Library for Scala 3"
 ThisBuild / homepage    := Some(url("https://github.com/johnspade/csv3s"))
 ThisBuild / licenses    := List(("MIT", url("https://opensource.org/licenses/MIT")))
-ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/johnspade/csv3s"), "git@github.com:johnspade/csv3s.git"))
+ThisBuild / scmInfo    := Some(ScmInfo(url("https://github.com/johnspade/csv3s"), "git@github.com:johnspade/csv3s.git"))
 ThisBuild / developers := List(
   Developer(
     "johnspade",
